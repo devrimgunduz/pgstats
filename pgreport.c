@@ -413,6 +413,8 @@ main(int argc, char **argv)
   fetch_table(ROLES_TITLE, backend_minimum_version(9,5) ? ROLES_SQL_95min : ROLES_SQL_94max);
   fetch_table(USER_PASSWORDS_TITLE, USER_PASSWORDS_SQL);
   fetch_table(DATABASEUSER_CONFIG_TITLE, DATABASEUSER_CONFIG_SQL);
+  fetch_table(SESSIONSWITHSSL_TITLE, SESSIONSWITHSSL_CONFIG_SQL);
+  fetch_table(SESSIONSWITHOUTSSL_TITLE, SESSIONSWITHOUTSSL_CONFIG_SQL);
 
   /* Fetch local objects of the current database */
   printf("\\echo\n");

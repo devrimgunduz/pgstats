@@ -188,6 +188,12 @@
 #define WALCONTENTS_TITLE "Current WAL contents"
 #define WALCONTENTS_SQL "WITH wal_records AS (SELECT remap_resource_manager(resource_manager) AS res_manager, record_type, COUNT(*) AS count, SUM(record_length) as size FROM pg_get_wal_records_info((select redo_lsn from pg_control_checkpoint()), 'FFFFFFFF/FFFFFFFF') GROUP BY 1, 2) SELECT res_manager, record_type, count, round(count * 100.0 / (SUM(count) OVER ()), 1) AS \"%\", round(size * 100.0 / (SUM(size) OVER ()), 1) AS \"size%\" FROM wal_records ORDER BY 5 desc"
 
+#define SESSIONSWITHSSL_TITLE "Sessions with SSL"
+#define SESSIONSWITHSSL_CONFIG_SQL "SELECT pid, usename, application_name, client_addr, ssl FROM pg_stat_ssl JOIN pg_stat_activity USING (pid) WHERE ssl = true AND client_addr IS NOT NULL;"
+
+#define SESSIONSWITHOUTSSL_TITLE "Sessions without SSL"
+#define SESSIONSWITHOUTSSL_CONFIG_SQL "SELECT pid, usename, application_name, client_addr, ssl FROM pg_stat_ssl JOIN pg_stat_activity USING (pid) WHERE ssl = false AND client_addr IS NOT NULL;"
+
 #define CREATE_SCHEMA "CREATE SCHEMA pgreport"
 #define SET_SEARCHPATH "SET search_path TO pgreport"
 #define DROP_ALL "DROP FUNCTION IF EXISTS remap_resource_manager(text);DROP FUNCTION IF EXISTS get_corruptedindexes();DROP FUNCTION IF EXISTS get_value(text, text[], \"char\");DROP EXTENSION IF EXISTS pg_buffercache;DROP EXTENSION IF EXISTS pg_visibility;DROP EXTENSION IF EXISTS amcheck;DROP EXTENSION IF EXISTS pg_walinspect;DROP SCHEMA IF EXISTS pgreport"
