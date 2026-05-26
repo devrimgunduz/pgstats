@@ -190,5 +190,5 @@
 
 #define CREATE_SCHEMA "CREATE SCHEMA pgreport"
 #define SET_SEARCHPATH "SET search_path TO pgreport"
-#define DROP_ALL "DROP FUNCTION IF EXISTS remap_resource_manager(text);DROP FUNCTION get_corruptedindexes();DROP FUNCTION get_value(text, text[], \"char\");DROP EXTENSION pg_buffercache;DROP EXTENSION pg_visibility;DROP EXTENSION amcheck;DROP EXTENSION pg_walinspect;DROP SCHEMA pgreport"
+#define DROP_ALL "DROP FUNCTION IF EXISTS remap_resource_manager(text);DROP FUNCTION IF EXISTS get_corruptedindexes();DROP FUNCTION IF EXISTS get_value(text, text[], \"char\");DROP EXTENSION IF EXISTS pg_buffercache;DROP EXTENSION IF EXISTS pg_visibility;DROP EXTENSION IF EXISTS amcheck;DROP EXTENSION IF EXISTS pg_walinspect;DROP SCHEMA IF EXISTS pgreport"
 
