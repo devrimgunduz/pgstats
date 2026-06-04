@@ -198,3 +198,6 @@
 #define SET_SEARCHPATH "SET search_path TO pgreport"
 #define DROP_ALL "DROP FUNCTION IF EXISTS remap_resource_manager(text);DROP FUNCTION IF EXISTS get_corruptedindexes();DROP FUNCTION IF EXISTS get_value(text, text[], \"char\");DROP EXTENSION IF EXISTS pg_buffercache;DROP EXTENSION IF EXISTS pg_visibility;DROP EXTENSION IF EXISTS amcheck;DROP EXTENSION IF EXISTS pg_walinspect;DROP SCHEMA IF EXISTS pgreport"
 
+#define SEQUENCEEXHAUSTION_TITLE "Sequence exhaustion"
+#define SEQUENCEEXHAUSTION_SQL "SELECT n.nspname AS schema, t.relname AS table, a.attname AS column, pg_catalog.format_type(a.atttypid, a.atttypmod) AS col_type, s.sequencename, COALESCE(s.last_value, 0) AS last_value, 2147483647 AS col_max, ROUND(COALESCE(s.last_value, 0)::numeric / 2147483647 * 100) AS pct_used FROM pg_attribute a JOIN pg_class t ON a.attrelid = t.oid JOIN pg_namespace n ON t.relnamespace = n.oid JOIN pg_attrdef d ON d.adrelid = a.attrelid AND d.adnum = a.attnum JOIN pg_sequences s ON quote_ident(s.schemaname)||'.'||quote_ident(s.sequencename) = pg_get_serial_sequence( quote_ident(n.nspname)||'.'||quote_ident(t.relname), a.attname)::regclass::text WHERE a.atttypid = 'integer'::regtype AND a.attnum > 0 AND NOT a.attisdropped AND n.nspname NOT IN ('pg_catalog','information_schema') ORDER BY pct_used DESC, COALESCE(s.last_value, 0) DESC"
+
