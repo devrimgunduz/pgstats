@@ -219,3 +219,5 @@
 #define ATTRIBUTES_TITLE "Attributes and users"
 #define ATTRIBUTES_SQL "SELECT count(*) as roles, count(*) FILTER(WHERE rolcreaterole = 't') as createrole, count(*) FILTER(WHERE rolcreatedb = 't') as createdb, count(*) FILTER(WHERE rolsuper = 't')  as super, count(*) FILTER(WHERE rolcanlogin = 't')  as canlogin, count(*) FILTER(WHERE rolconfig IS NOT NULL) as conf, count(*) FILTER(WHERE rolvaliduntil IS NOT NULL) as valid_until, count(*) FILTER(WHERE rolconnlimit != -1) as conn_limit, count(*) FILTER(WHERE rolcanlogin = 't' AND passwd IS NULL) as "no pass", count(*) FILTER(WHERE rolcanlogin = 't' AND passwd LIKE ('md5%')) as md5, count(*) FILTER(WHERE rolcanlogin = 't' AND passwd LIKE ('SCRAM%')) as scram FROM pg_roles LEFT OUTER JOIN pg_shadow ON usename = rolname WHERE rolname NOT LIKE 'pg_%'"
 
+#define PGSTATSTATEMENTSINFO_TITLE "Info on pg_stat_statements"
+#define PGSTATSTATEMENTSINFO_SQL "SELECT * FROM pg_stat_statements_info"
