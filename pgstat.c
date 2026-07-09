@@ -517,7 +517,7 @@ bool        backend_minimum_version(int major, int minor);
 void        print_header(void);
 void        print_line(void);
 void        allocate_struct(void);
-static void needhdr(int dummy);
+static void needhdr(SIGNAL_ARGS);
 static void needresize(int);
 void        doresize(void);
 static void quit_properly(SIGNAL_ARGS);
@@ -5048,7 +5048,7 @@ allocate_struct(void)
  * Force a header to be prepended to the next output.
  */
 static void
-needhdr(int dummy)
+needhdr(SIGNAL_ARGS)
 {
   hdrcnt = 1;
 }
